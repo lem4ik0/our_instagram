@@ -1,24 +1,17 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../config/database');
-const comment = require('./model_comment');
 
-const userComment = sequelize.define('user_comment', {
+const userSubscribe = sequelize.define('user_subscribe', {
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true
     },
-    commentId: {
+    subscribeId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         unique: true
-    },
-    comment: {
-        type: DataTypes.STRING,
-        allowNull: true
     }
-
 });
 
-
-module.exports = userComment;
+module.exports = userSubscribe;
