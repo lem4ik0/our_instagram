@@ -1,11 +1,24 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 5000;
+const sequelize = require('./db')
+
 
 app.get('/', (req, res) => {
-  res.send('Сервер работает!');
+  res.send('Сервер работает!')
 });
 
-app.listen(port, () => {
-  console.log(`Сервер запущен на порту ${port}`);
-});
+
+
+const start=async() => {
+    try{
+       await sequelize.authenticate()
+       await sequelize.sync()
+       console.log('Database connected')
+        app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
+     } catch(e){
+        console.log(e)
+    }
+}
+start()
