@@ -4,7 +4,7 @@ const db = new Database('app.db');
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: 'app.db'
+  storage: '.db'
 });
 db.exec("CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY, body text)");
 const insert=db.prepare("INSERT into notes (body) VALUES (?)");
