@@ -1,21 +1,17 @@
 const {DataTypes} = require('sequelize');
-const sequelize = require('../config/database');
-const comment = require('./model_comment');
+const sequelize = require('D:/JavaScript/my-network/db.js');
+
 
 const userComment = sequelize.define('user_comment', {
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        unique: true
+           
     },
-    commentId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        unique: true
-    },
+    
+    
     comment: {
-        type: DataTypes.STRING,
-        allowNull: true
+        type: DataTypes.STRING,      
     }
 
 });

@@ -1,16 +1,13 @@
 const {DataTypes} = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('D:/JavaScript/my-network/db.js');
 
 const userSubscribe = sequelize.define('user_subscribe', {
     userId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        unique: true
+        allowNull: false        
     },
-    subscribeId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        unique: true
+    subscribeChannel: {
+        type: DataTypes.STRING       
     }
 });
 
