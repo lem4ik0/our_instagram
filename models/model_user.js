@@ -1,5 +1,5 @@
 const {DataTypes} = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('D:/JavaScript/my-network/db.js');
 
 const User = sequelize.define('User', {
   id: {
@@ -23,7 +23,7 @@ const User = sequelize.define('User', {
       isEmail: true
     }
   },
-  hashPassword: {
+  password: {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
