@@ -1,10 +1,10 @@
 const express = require('express');
-const router = express.Router();
+const routerSignup = express.Router();
 const sqlite = require('D:/JavaScript/my-network/db.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/model_user.js');
-router.post('/signup', async (req, res) => {
+routerSignup.post('/signup', async (req, res) => {
   const { username, email, password } = req.body;
   try{
   const hash = await bcrypt.hash(req.body.password, 10);
@@ -30,4 +30,4 @@ router.post('/signup', async (req, res) => {
           });
      
 
-module.exports = router;
+module.exports = routerSignup;
