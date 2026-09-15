@@ -3,9 +3,11 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const sequelize = require('./db')
-const router = require('../reg_log/reg.js')
+const routerSignup = require('../reg_log/reg.js')
+const routerLogin = require('../reg_log/log.js')
 app.use(express.json())
-app.use('/user',router)
+app.use('/user',routerSignup)
+app.use('/user',routerLogin)
 
 app.get('/', (req, res) => {
   res.send('Сервер работает!')

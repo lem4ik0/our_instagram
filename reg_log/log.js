@@ -3,7 +3,6 @@ const routerLogin = express.Router();
 const sqlite = require('D:/JavaScript/my-network/db.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-app.use(express.json())
 const User = require('../models/model_user.js');
 routerLogin.post('/login', async (req, res) => {
     const { email } = req.body;
@@ -22,7 +21,7 @@ routerLogin.post('/login', async (req, res) => {
                 });
             }
             else {
-                const token = jwt.log({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+                const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
                 return res.status(200).json({
                     message: 'Authentication successful.',
                     token: token

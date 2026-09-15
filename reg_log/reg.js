@@ -1,5 +1,4 @@
 const express = require('express');
-
 const routerSignup = express.Router();
 const sqlite = require('D:/JavaScript/my-network/db.js');
 const bcrypt = require('bcrypt');
