@@ -3,6 +3,7 @@ const routerLogin = express.Router();
 const sqlite = require('D:/JavaScript/my-network/db.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+app.use(express.json())
 const User = require('../models/model_user.js');
 routerLogin.post('/login', async (req, res) => {
     const { email } = req.body;
