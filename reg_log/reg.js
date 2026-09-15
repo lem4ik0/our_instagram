@@ -1,4 +1,5 @@
 const express = require('express');
+
 const routerSignup = express.Router();
 const sqlite = require('D:/JavaScript/my-network/db.js');
 const bcrypt = require('bcrypt');
@@ -29,10 +30,20 @@ routerSignup.post('/signup', async (req, res) => {
      const result = await user.save();
      const safeUser = result.toJSON();
      safeUser.password = undefined;
-          return res.status(201).json({
+           res.status(201).json({
             message: 'User created successfully',
             user: safeUser
           })
+          const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+                          return res.status(200).json({
+                              message: 'Authentication successful.',
+                              token: token
+                          })
+
+                         
+
+           
+                        
         
         }catch (err) {
           console.error(err);  
