@@ -4,7 +4,7 @@ const sqlite = require('D:/JavaScript/my-network/db.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/model_user.js');
-routerSignup.post('/signup', async (req, res) => {
+routerSignup.post('/auth', async (req, res) => {
   const { username, email, password } = req.body;
   const existingUser = await User.findOne({ where: { email: email } });
   if (existingUser) {
@@ -26,18 +26,21 @@ routerSignup.post('/signup', async (req, res) => {
         email: req.body.email,
         password: hash
       })
-     const result = await user.save();
-     const safeUser = result.toJSON();
-     safeUser.password = undefined;
-           res.status(201).json({
-            message: 'User created successfully',
-            user: safeUser
-          })
-          const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-                          return res.status(200).json({
-                              message: 'Authentication successful.',
-                              token: token
-                          })
+     const result = await user.save()
+const safeUser = result.toJSON()
+safeUser.password = undefined
+
+const token = jwt.sign(
+  { id: user.id },
+  process.env.JWT_SECRET,
+  { expiresIn: '1h' }
+)
+
+return res.status(201).json({
+  message: 'User created successfully',
+  token,
+  user: safeUser
+})
 
                          
 
