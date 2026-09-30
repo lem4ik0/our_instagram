@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Montserrat:ital,wght@0,300;1,300&display=swap');
+
+
+
+.menu{
+font-family: "Manrope", sans-serif;
+width: 240px;
+height: 100vh;
+}
+
+.container{
+background-color: rgba(255, 255, 255, 0.297);
+height: 100%;
+}
+
+a{
+border-radius: 8px;
+padding: 20px 30px;
+width: 178px;
+color: #222522;
+text-decoration: none;
+font-weight: 800;
+font-size: 13;
+transition: background-color 0.3s ease;
+ box-sizing: border-box;
+}
+
+a:hover{
+background-color: #22252236;
+border-radius: 8px;
+}
+
+
+
+.menu .container .menu-refs{
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap:30px;
+max-width: 40px;
+margin-left: 0;
+margin-right: auto;
+padding:18px 18px;
+padding-top: 37px;
+}
+
+menu .baner{
+margin-left: 10px;
+font-size:29px;
+font-weight:700;
+}
+
+

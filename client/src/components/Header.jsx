@@ -9,26 +9,56 @@ let [loginWindowOpen,logIn]=useState(false)
 const [username, setUsername] = useState('')
 const [email, setEmail] = useState('')
 const [password, setPassword] = useState('')
+const [errorMessage, setErrorMessage] = useState('');
 
 const signlogin= async()=>{
+  try{
   if(signWindowOpen){
     const responce=await signup(username, email, password)
     console.log(responce)
+    window.location.href = "http://localhost:3000/auth/menu";
 
 
   }else if(loginWindowOpen){
     const responce= await login (email, password)
     console.log(responce)
-
+window.location.href = "http://localhost:3000/auth/menu";
   }
 
+}catch(err){
+console.error(err);
+if(err.responce && err.responce.status===500){
+setErrorMessage('Error creating user');
+}else {
+        setErrorMessage('Error,try again');
+        }
+
+
 }
+}
+  
+    let errorBlock = null;
+
+    
+    if (errorMessage !== '') {
+        errorBlock = (
+            <div style={{ color: '#d20012', margin: '-30px 200px', fontSize: '14px', fontWeight: 'bold', whiteSpace: 'nowrap'}}>
+                {errorMessage}
+            </div>
+            
+        );
+    }
+    
+
+
 
   return (
     <header className='header'>
+      <title>INSTAGRAM</title>
     <div>
         <span className='logo'>Instagram</span> 
     </div>
+   
     <div> 
         <span className='presentation'> </span>
       
@@ -71,7 +101,7 @@ const signlogin= async()=>{
            onChange={(event) => setPassword(event.target.value)}
          />
          <Button onClick={signlogin}>Create Account</Button>
-
+ {errorBlock}
         </div>
 
         )}
@@ -106,12 +136,12 @@ const signlogin= async()=>{
            onChange={(event) => setPassword(event.target.value)}
          />
           <Button onClick={signlogin}>Submit</Button>
-
+       {errorBlock}
         </div>
 
         )}
 
-      
+     
     </div>
     </header>
   )
@@ -125,9 +155,3 @@ const signlogin= async()=>{
 
 
 
-/*
-
-
-
-
-*/
