@@ -1,20 +1,32 @@
 import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { signup,login } from '../https/userApi';
+import defualt_Avatar from '../images/default-avatar.jpg'
+import { signup, login, uploadAvatar } from '../https/userApi';
 
 export default function Header() {
-let [signWindowOpen,signUp]=useState(false)
-let [loginWindowOpen,logIn]=useState(false)
-const [username, setUsername] = useState('')
-const [email, setEmail] = useState('')
-const [password, setPassword] = useState('')
-const [errorMessage, setErrorMessage] = useState('');
+  const[img,setImg]=React.useState(null)
+  const[avatar,setAvatar]=React.useState(null)
+
+React.useEffect(() => () => {
+  if (img?.startsWith('blob:')) URL.revokeObjectURL(img);
+}, [img]);
+
+let [signWindowOpen,signUp]=React.useState(false)
+let [loginWindowOpen,logIn]=React.useState(false)
+const [username, setUsername] = React.useState('')
+const [email, setEmail] = React.useState('')
+const [password, setPassword] = React.useState('')
+const [errorMessage, setErrorMessage] = React.useState('');
 
 const signlogin= async()=>{
   try{
   if(signWindowOpen){
     const responce=await signup(username, email, password)
+    if (avatar) {
+      const avatarUrl = await uploadAvatar(avatar);
+      setImg(avatarUrl);
+    }
     console.log(responce)
     window.location.href = "http://localhost:3000/auth/menu";
 
@@ -27,11 +39,7 @@ window.location.href = "http://localhost:3000/auth/menu";
 
 }catch(err){
 console.error(err);
-if(err.responce && err.responce.status===500){
-setErrorMessage('Error creating user');
-}else {
-        setErrorMessage('Error,try again');
-        }
+setErrorMessage(err.response?.data?.message || err.message || 'Error, try again');
 
 
 }
@@ -102,6 +110,21 @@ setErrorMessage('Error creating user');
          />
          <Button onClick={signlogin}>Create Account</Button>
  {errorBlock}
+
+ <div className='avatar-preview'>
+    
+    {
+    img
+    ?<img className='avatar' src={img} alt="Avatar" />
+    :<img className='avatar' src={defualt_Avatar} alt="Avatar" />
+    }
+
+ </div>
+ <input type="file" accept="image/*" onChange={e => {
+   const file = e.target.files[0];
+   setAvatar(file);
+   setImg(file ? URL.createObjectURL(file) : null);
+ }} />
         </div>
 
         )}
