@@ -31,7 +31,7 @@ const safeUser = result.toJSON()
 safeUser.password = undefined
 
 const token = jwt.sign(
-  { id: user.id },
+  { username: user.username, id: user.id },
   process.env.JWT_SECRET,
   { expiresIn: '1h' }
 )

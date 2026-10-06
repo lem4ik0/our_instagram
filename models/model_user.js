@@ -1,6 +1,5 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('D:/JavaScript/my-network/db.js');
-
 const User = sequelize.define('User', {
   id: {
     type: DataTypes.INTEGER,
@@ -29,20 +28,28 @@ const User = sequelize.define('User', {
     validate: {
       len: [6, 100]
     }
-  }
-}, 
-{role: {
+  },
+  role: {
     type: DataTypes.ENUM('user', 'admin', 'moderator'),
     defaultValue: 'user'
   },
+
+avatar: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: null
+  },
+
 isactive: {
     type: DataTypes.BOOLEAN,
     defaultValue: true
   },
-    
-
+},
+{
   tableName: 'users',
   timestamps: true
 });
+ 
+
 
 module.exports = User;
